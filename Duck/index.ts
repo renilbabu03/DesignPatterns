@@ -1,6 +1,7 @@
 import { Duck } from "./class/Duck";
-import { FlyWithWings } from "./class/FlyWithWings";
 import { Quack } from "./class/Quack";
+import { FlyWithWings, FlyNoWay, FlyRocketPowered } from "./class/Fly";
+import { CallSmallDuck, CallWistle } from "./class/Call";
 
 class MallardDuck extends Duck{
     
@@ -19,4 +20,19 @@ class MiniDuckSimulator{
     }
 }
 
-var pro = new MiniDuckSimulator();
+class ModelDuck extends Duck{
+    constructor(){
+      super();
+      this.flybehaviour = new FlyNoWay();
+      this.quackBehaviour = new Quack();   
+      this.callbehaviour = new CallSmallDuck();
+    }
+}
+
+var pro = new ModelDuck();
+pro.performFly();
+pro.setFlyBehaviour(new FlyRocketPowered());
+pro.performFly();
+pro.performCall();
+pro.setCallBehaviour(new CallWistle())
+pro.performCall();
