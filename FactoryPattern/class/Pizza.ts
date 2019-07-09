@@ -1,7 +1,11 @@
+import { PizzaIngredientFactory } from "./PizzaIngredientFactory";
+
 export abstract class Pizza{
     name:string;
     dough:string;
     sauce:string;
+    cheese:string;
+    clam:string;
     toppings:string[] = [];
 
     public prepare():void{
@@ -31,12 +35,16 @@ export abstract class Pizza{
 }
 
 export class CheesePizza extends Pizza {
-    constructor(){
+    ingredientFacotory:PizzaIngredientFactory;
+    constructor(ingredientFactory:PizzaIngredientFactory){
         super();
-        this.name = "Chicago Style Sauce and Cheese Pizza"
-        this.dough = "Thick crust dough";
-        this.sauce = "Tomato Sauce";
-        this.toppings.push("Mozarella cheese");
+        this.ingredientFacotory = ingredientFactory;
+    }
+
+    prepare(){
+        this.dough = this.ingredientFacotory.createDough();
+        this.sauce = this.ingredientFacotory.createSauce();
+        this.cheese = this.ingredientFacotory.createCheese();
     }
 
 }
@@ -53,12 +61,17 @@ export class PepperoniPizza extends Pizza {
 }
 
 export class ClamPizza extends Pizza {
-    constructor(){
+    ingredientFacotory:PizzaIngredientFactory;
+    constructor(ingredientFactory:PizzaIngredientFactory){
         super();
-        this.name = "Chicago Style Sauce and Cheese Pizza"
-        this.dough = "Thick crust dough";
-        this.sauce = "Tomato Sauce";
-        this.toppings.push("Mozarella cheese");
+        this.ingredientFacotory = ingredientFactory;
+    }
+
+    prepare(){
+        this.dough = this.ingredientFacotory.createDough();
+        this.sauce = this.ingredientFacotory.createSauce();
+        this.cheese = this.ingredientFacotory.createCheese();
+        this.clam = this.ingredientFacotory.createClam();
     }
 
 }

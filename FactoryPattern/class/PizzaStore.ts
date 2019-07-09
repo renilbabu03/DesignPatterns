@@ -1,6 +1,7 @@
 import { SimplePizzaFactory } from "./SimplePizzaFactory";
 import { Pizza } from "../interface/Pizza";
-import { NYStyleCheesePizza, NYStylePepparoniPizza, NYStyleClamPizza, NYStyleVeggiePizza, CHStyleCheesePizza, CHStylePepparoniPizza, CHStyleClamPizza, CHStyleVeggiePizza, CaliforniaStyleCheesePizza, CaliforniaStylePepparoniPizza, CaliforniaStyleClamPizza, CaliforniaStyleVeggiePizza } from "./Pizza";
+import { NYStyleCheesePizza, NYStylePepparoniPizza, NYStyleClamPizza, NYStyleVeggiePizza, CHStyleCheesePizza, CHStylePepparoniPizza, CHStyleClamPizza, CHStyleVeggiePizza, CaliforniaStyleCheesePizza, CaliforniaStylePepparoniPizza, CaliforniaStyleClamPizza, CaliforniaStyleVeggiePizza, CheesePizza, ClamPizza } from "./Pizza";
+import { PizzaIngredientFactory, NYPizzaIngredientFactory } from "./PizzaIngredientFactory";
 
 export abstract class PizzaStore {
     // factory:SimplePizzaFactory;
@@ -34,13 +35,15 @@ export class NYPizzaStore extends PizzaStore {
     pro = ''
 
     public createPizza(type: String): Pizza {
+
         var pizza: Pizza = null;
+        var ingredientFactory:PizzaIngredientFactory = new NYPizzaIngredientFactory();
         if (type == "cheese") {
-            pizza = new NYStyleCheesePizza();
+            pizza = new CheesePizza(ingredientFactory)
         } else if (type == "pepperoni") {
             pizza = new NYStylePepparoniPizza();
         } else if (type == "clam") {
-            pizza = new NYStyleClamPizza();
+            pizza = new ClamPizza(ingredientFactory)
         } else if (type == "veggie") {
             pizza = new NYStyleVeggiePizza();
         }
